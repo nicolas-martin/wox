@@ -13,8 +13,8 @@ type Aws struct {
 	S3 *s3.S3
 }
 
-//New instanciate a new aws struct
-func New() Aws {
+//NewAws instanciate a new aws struct
+func NewAws() Aws {
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String("ca-central-1")},
 	)

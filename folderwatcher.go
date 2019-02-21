@@ -13,8 +13,8 @@ type FolderWatcher struct {
 	Watcher *watcher.Watcher
 }
 
-// New ...
-func New() FolderWatcher {
+// NewFolderWatcher ...
+func NewFolderWatcher() FolderWatcher {
 
 	w := watcher.New()
 
