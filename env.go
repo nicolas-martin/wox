@@ -1,4 +1,4 @@
-package config
+package wox
 
 import (
 	"github.com/kelseyhightower/envconfig"

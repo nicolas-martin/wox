@@ -1,4 +1,4 @@
-package folderwatcher
+package wox
 
 import (
 	"fmt"
