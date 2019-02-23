@@ -8,20 +8,25 @@ import (
 	"github.com/radovskyb/watcher"
 )
 
+const watchInterval = 100
+
 // FolderWatcher ...
 type FolderWatcher struct {
 	Watcher *watcher.Watcher
+	Folder  string
 }
 
 // NewFolderWatcher ...
-func NewFolderWatcher() FolderWatcher {
+func NewFolderWatcher(folder string) FolderWatcher {
 
 	w := watcher.New()
 
 	wa := FolderWatcher{
 		Watcher: w,
+		Folder:  folder,
 	}
 
+	wa.Watcher.IgnoreHiddenFiles(true)
 	return wa
 }
 
@@ -42,7 +47,7 @@ func (w FolderWatcher) Start() error {
 	}()
 
 	// Watch test_folder recursively for changes.
-	if err := w.Watcher.AddRecursive("test_folder"); err != nil {
+	if err := w.Watcher.AddRecursive(w.Folder); err != nil {
 		return err
 	}
 
@@ -60,7 +65,7 @@ func (w FolderWatcher) Start() error {
 	}()
 
 	// Start the watching process - it'll check for changes every 100ms.
-	if err := w.Watcher.Start(time.Millisecond * 100); err != nil {
+	if err := w.Watcher.Start(time.Millisecond * watchInterval); err != nil {
 		return err
 	}
 

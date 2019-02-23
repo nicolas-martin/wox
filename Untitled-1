@@ -1,0 +1,20 @@
+aws s3 website s3://www.my-awesome-site.com/ --index-document index.html --error-document error.html
+
+{
+    "Version": "2008-10-17",
+    "Id": "PolicyForPublicWebsiteContent",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::www.my-awesome-site.com/*"
+        }
+    ]
+}
+aws s3api put-bucket-policy --bucket www.my-awesome-site.com --policy file://policy.json
+
+aws s3 cp personal-blog/src/_site/ s3://www.my-awesome-site.com/ --recursive
